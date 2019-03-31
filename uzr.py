@@ -11,6 +11,8 @@ TERMINAL_WIDTH, _ = shutil.get_terminal_size()
 
 t = time.localtime()
 localOffsetSeconds = calendar.timegm(t) - calendar.timegm(time.gmtime(time.mktime(t)))
+if t.tm_isdst:
+  localOffsetSeconds -= 3600 #get base offset without DST
 if len(sys.argv) >= 2:
   localOffsetSeconds = int(sys.argv[1])
 print("UZR - Universal Realtime Zone (%d seconds offset)" % localOffsetSeconds)
